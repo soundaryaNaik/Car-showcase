@@ -16,14 +16,16 @@ module.exports = {
         "black-100": "#bbbbbb",
         "black-300": "#9195a1",
         "black-400": "#2C2E33",
-        "primary-purple": "#3b3c98",
+        "primary-purple": {
+          DEFAULT: "#3b3c98",
+          100: "rgba(59, 60, 152, 0.1)",
+        },
         "secondary-orange": "#f79761",
-
-        "primary-purple-100": "rgba(59, 60, 152, 0.1)",
-      },
-      backgroundImage: {
-        pattern: "url('/pattern.png')",
-        "hero-bg": "url('/hero-bg.png')",
+        "light-white": {
+          DEFAULT: "rgba(59,60,152,0.03)",
+          100: "rgba(59,60,152,0.02)",
+        },
+        gray: "#747A88",
       },
     },
   },
