@@ -1,7 +1,6 @@
 import { MouseEventHandler } from "react";
 
 export interface CarProps {
-  id?: string;
   city_mpg: number;
   class: string;
   combination_mpg: number;
@@ -39,7 +38,6 @@ export interface CarCardProps {
 }
 
 export interface CustomButtonProps {
-  isDisabled?: boolean;
   btnType?: "button" | "submit";
   containerStyles?: string;
   textStyles?: string;
@@ -48,24 +46,13 @@ export interface CustomButtonProps {
   handleClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface OptionProps {
+export interface FilterItemProps {
   title: string;
-  value: string;
+  options: string[];
 }
 
-export interface CustomFilterProps {
-  title: string;
-  options: OptionProps[];
-}
-
-export interface ShowMoreProps {
+export interface PaginationProps {
   pageNumber: number;
-  isNext: boolean;
-}
-
-export interface SearchManuFacturerProps {
-  manufacturer: string;
-  setManuFacturer: (manufacturer: string) => void;
 }
 
 export interface SearchButtonProps {

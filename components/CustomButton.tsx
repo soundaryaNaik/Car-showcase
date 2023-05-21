@@ -1,10 +1,15 @@
 "use client";
 
-import Image from "next/image";
-
 import { CustomButtonProps } from "@types";
 
-const Button = ({ isDisabled, btnType, containerStyles, textStyles, title, rightIcon, handleClick }: CustomButtonProps) => (
+const Button = ({
+  btnType,
+  containerStyles,
+  textStyles,
+  title,
+  rightIcon,
+  handleClick,
+}: CustomButtonProps) => (
   <button
     disabled={isDisabled}
     type={btnType || "button"}
@@ -13,13 +18,8 @@ const Button = ({ isDisabled, btnType, containerStyles, textStyles, title, right
   >
     <span className={`flex-1 text-button-b ${textStyles}`}>{title}</span>
     {rightIcon && (
-      <div className='relative w-6 h-6'>
-        <Image
-          src={rightIcon}
-          alt='arrow_left'
-          fill
-          className='object-contain'
-        />
+      <div className="absolute right-5 ml-2">
+        <img src={rightIcon} alt="arrow_left" />
       </div>
     )}
   </button>
