@@ -23,7 +23,7 @@ A car showcase application using Next.js 13
           "white-600": "#fcfcfc",
           "black-100": "#bbbbbb",
           "black-300": "#9195a1",
-          "black-100": "#2C2E33",
+          "black-400": "#2C2E33",
           "primary-purple": {
             DEFAULT: "#3b3c98",
             100: "rgba(59, 60, 152, 0.1)",
@@ -33,7 +33,7 @@ A car showcase application using Next.js 13
             DEFAULT: "rgba(59,60,152,0.03)",
             100: "rgba(59,60,152,0.02)",
           },
-          grey: "#747A88",
+          gray: "#747A88",
         },
       },
     },
@@ -57,18 +57,6 @@ npx create-next-app@latest
 - Would you like to use Tailwind CSS with this project? **_Yes_**
 - Would you like to use the `src/ directory` with this project? **_No_**
 - What import alias would you like configured? **_@\*_**
-
-### Things to know
-
-To enable the functionality of dynamic images, we need to inform Next.js explicitly that we anticipate receiving dynamic image URLs from a particular source. This can be achieved by adjusting the configuration of Next.js as follows:
-
-```javascript
-const nextConfig = {
-  images: {
-    domains: ["cdn.imagin.studio"],
-  },
-};
-```
 
 ### Notes
 
