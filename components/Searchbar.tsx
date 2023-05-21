@@ -27,11 +27,24 @@ const SearchBar = () => {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (manufacturer.trim() === "" && model.trim() === "") {
-      return alert("Please provide some input");
-    }
+    // Extract the input elements from the event target
+    const target = e.target as typeof e.target & {
+      elements: {
+        model: { value: string };
+        manufacturer: { value: string };
+      };
+    };
 
-    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+    // Get the values of the model and manufacturer inputs
+    const modelValue = target.elements.model.value;
+    const manufacturerValue = target.elements.manufacturer.value;
+
+    // Check if both modelValue and manufacturerValue are empty
+    if (modelValue === "" && manufacturerValue === "")
+      alert("Please provide some search parameters...");
+
+    // update the URL search parameters
+    updateSearchParams(modelValue, manufacturerValue);
   };
 
   const updateSearchParams = (model: string, manufacturer: string) => {
@@ -39,18 +52,12 @@ const SearchBar = () => {
     const searchParams = new URLSearchParams(window.location.search);
 
     // Update or delete the 'model' search parameter based on the 'model' value
-    if (model) {
-      searchParams.set("model", model);
-    } else {
-      searchParams.delete("model");
-    }
+    if (model) searchParams.set("model", model);
+    else searchParams.delete("model");
 
     // Update or delete the 'manufacturer' search parameter based on the 'manufacturer' value
-    if (manufacturer) {
-      searchParams.set("manufacturer", manufacturer);
-    } else {
-      searchParams.delete("manufacturer");
-    }
+    if (manufacturer) searchParams.set("manufacturer", manufacturer);
+    else searchParams.delete("manufacturer");
 
     // Generate the new pathname with the updated search parameters
     const newPathname = `${
