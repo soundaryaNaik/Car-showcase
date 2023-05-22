@@ -53,14 +53,14 @@ export default async function Home({ searchParams }: HomeProps) {
               drive={car.drive}
               cityMPG={car.city_mpg}
             />
-          </section>
-        ) : (
-          <div className='mt-16 flex justify-center items-center flex-col gap-2'>
-            <h2 className='text-black text-xl font-bold'>Oops, no results</h2>
-            <p>{allCars?.message}</p>
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+
+        <Pagination
+          pageNumber={(searchParams.limit || 10) / 10}
+          isNext={(searchParams.limit || 10) > allCars.length}
+        />
+      </section>
     </main>
   );
 }
