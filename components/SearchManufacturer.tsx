@@ -3,78 +3,89 @@ import Image from "next/image";
 import { Combobox, Transition } from "@headlessui/react";
 
 import { manufacturers } from "@constants";
-import { SearchManuFacturerProps } from "@types";
 
-const SearchManufacturer = ({ manufacturer, setManuFacturer }: SearchManuFacturerProps) => {
+const SearchManufacturer = () => {
+  const [selected, setSelected] = useState("");
   const [query, setQuery] = useState("");
 
-  const filterManufacturers =
+  const filtereManufacturers =
     query === ""
       ? manufacturers
-      : manufacturers.filter((item) =>
-          item
+      : manufacturers.filter((manufacturer) =>
+          manufacturer
             .toLowerCase()
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
 
   return (
-    <div className='flex-1 max-sm:w-full flex justify-start items-center'>
-      <Combobox value={manufacturer} onChange={setManuFacturer}>
-        <div className='relative w-full'>
-          <Combobox.Button className='absolute top-[14px]'>
+    <div className="flex-1 max-sm:w-full flex justify-start items-center">
+      <Combobox value={selected} onChange={setSelected}>
+        <div className="relative w-full">
+          <Combobox.Button className="absolute top-[14px]">
             <Image
-              src='/car-logo.svg'
+              src="/car-logo.svg"
               width={25}
               height={25}
-              className='ml-4'
-              alt='car logo'
+              className="ml-4"
+              alt="car logo"
             />
           </Combobox.Button>
           <Combobox.Input
-            className='w-full h-[52px] pl-12 p-4 rounded-l-full max-sm:rounded-full bg-light-white outline-none text-white-800 cursor-pointer'
-            displayValue={(item: string) => item}
+            className="w-full h-[52px] pl-12 p-4 rounded-l-full max-sm:rounded-full bg-light-white outline-none text-white-800 cursor-pointer"
+            displayValue={(manufacturer: string) => manufacturer}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder='bmw...'
+            placeholder="bmw..."
           />
 
           <Transition
             as={Fragment}
-            leave='transition ease-in duration-100'
-            leaveFrom='opacity-100'
-            leaveTo='opacity-0'
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
             afterLeave={() => setQuery("")}
           >
             <Combobox.Options
-              className='absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'
+              className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
               static
             >
-              {filterManufacturers.length === 0 && query !== "" ? (
+              {filtereManufacturers.length === 0 && query !== "" ? (
                 <Combobox.Option
                   value={query}
-                  className='cursor-default select-none py-2 pl-10 pr-4'
+                  className="cursor-default select-none py-2 pl-10 pr-4"
                 >
                   Create "{query}"
                 </Combobox.Option>
               ) : (
-                filterManufacturers.map((item) => (
+                filtereManufacturers.map((manufacturer) => (
                   <Combobox.Option
-                    key={item}
+                    key={manufacturer}
                     className={({ active }) =>
                       `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                        active ? "bg-primary-blue text-white" : "text-gray-900"
+                        active
+                          ? "bg-primary-purple text-white"
+                          : "text-gray-900"
                       }`
                     }
-                    value={item}
+                    value={manufacturer}
                   >
                     {({ selected, active }) => (
                       <>
-                        <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                          {item}
+                        <span
+                          className={`block truncate ${
+                            selected ? "font-medium" : "font-normal"
+                          }`}
+                        >
+                          {manufacturer}
                         </span>
 
                         {selected ? (
-                          <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active? "text-white": "text-pribg-primary-purple"}`}
+                          <span
+                            className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                              active
+                                ? "text-white"
+                                : "text-pribg-primary-purple"
+                            }`}
                           ></span>
                         ) : null}
                       </>
