@@ -3,10 +3,9 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import { addCarToLocalStorage, calculateCarRent } from "@utils";
+import { calculateCarRent } from "@utils";
 import CustomButton from "./CustomButton";
 import CarDetails from "./CarDetails";
-import { usePathname } from "next/navigation";
 import { CarProps } from "@types";
 
 interface CarCardProps {
@@ -14,12 +13,10 @@ interface CarCardProps {
 }
 
 const CarCard = ({ car }: CarCardProps) => {
-  const pathName = usePathname();
-
   const [isLiked, setIsLiked] = useState(false);
   const { city_mpg, year, make, model, transmission, drive } = car;
 
-  let [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const imaginApiKey = process.env.NEXT_PUBLIC_IMAGIN_API_KEY;
 
@@ -29,11 +26,6 @@ const CarCard = ({ car }: CarCardProps) => {
 
   function openModal() {
     setIsOpen(true);
-  }
-
-  function handleFavorites() {
-    setIsLiked(!isLiked);
-    addCarToLocalStorage(car);
   }
 
   const carRent = calculateCarRent(city_mpg, year);
@@ -46,18 +38,12 @@ const CarCard = ({ car }: CarCardProps) => {
         </h2>
 
         <Image
-          src={
-            pathName === "/my-favorites"
-              ? "/heart-filled.svg"
-              : !isLiked
-              ? "/heart-outline.svg"
-              : "/heart-filled.svg"
-          }
+          src={!isLiked ? "/heart-outline.svg" : "/heart-filled.svg"}
           width={24}
           height={24}
           alt="heart"
           className="object-contain cursor-pointer mt-0.5"
-          onClick={handleFavorites}
+          onClick={() => setIsLiked(!isLiked)}
         />
       </div>
 

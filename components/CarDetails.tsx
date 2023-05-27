@@ -1,7 +1,8 @@
-import { Dialog, Transition } from "@headlessui/react";
-import { CarProps } from "@types";
 import Image from "next/image";
 import { Fragment } from "react";
+
+import { Dialog, Transition } from "@headlessui/react";
+import { CarProps } from "@types";
 
 interface CarDetailsProps {
   isOpen: boolean;
