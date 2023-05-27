@@ -54,12 +54,15 @@ const SearchBar = () => {
   };
 
   return (
-    <form className="searchbar" onSubmit={handleSearch}>
+    <form
+      className="flex items-center justify-center max-sm:flex-col w-full relative mx-auto max-sm:gap-4 max-w-3xl"
+      onSubmit={handleSearch}
+    >
       <SearchManufacturer
         manufacturer={manufacturer}
         setManuFacturer={setManuFacturer}
       />
-      <div className="searchbar__img">
+      <div className="flex-1 max-sm:w-full flex justify-start items-center relative">
         <Image
           src="/model-icon.png"
           width={25}
@@ -73,7 +76,7 @@ const SearchBar = () => {
           value={model}
           onChange={(e) => setModel(e.target.value)}
           placeholder="M8 sport..."
-          className="searchbar__input"
+          className="w-full h-[52px] pl-12 p-4 bg-light-white rounded-r-full max-sm:rounded-full outline-none text-white-800 cursor-pointer"
         />
         <SearchButton otherClasses="sm:hidden" />
       </div>
